@@ -7,7 +7,7 @@ from keras.layers import Dense,Dropout,TimeDistributed, Activation
 from keras.layers import LSTM
 from keras.layers import Embedding
 from keras.models import load_model
- 
+
 
 def generate_seq(model, tokenizer, max_length, seed_text, n_words):
 	in_text = seed_text
