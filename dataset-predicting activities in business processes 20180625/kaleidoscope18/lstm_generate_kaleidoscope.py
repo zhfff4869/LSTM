@@ -12,11 +12,11 @@ from keras.models import load_model
 
 with open('log_acron.txt', 'r') as myfile:	#read log data
     data=myfile.read()
-
+#num_words: the maximum number of words to keep, based on word frequency. Only the most common num_words-1 words will be kept.
 
 tokenizer = Tokenizer()	#This class allows to vectorize a text corpus
 tokenizer.fit_on_texts([data])	#Updates internal vocabulary based on a list of texts.
-encoded = tokenizer.texts_to_sequences([data])[0]	#Transforms each text in texts to a sequence of integers,encoded by word_index dict.use [0] to get the texts for document_count:1
+encoded = tokenizer.texts_to_sequences([data])[0]	#Transforms each text in texts to a sequence of integers,encoded by word_index dict.use [0] to get the texts for document_count=1
 vocab_size = len(tokenizer.word_index) + 1	#+1 take the _len_ element into count? but word_doc=55
 print('Vocabulary Size: %d' % vocab_size)
 
@@ -41,7 +41,7 @@ model.add(LSTM(50))
 model.add(Dropout(0.1))
 model.add(Dense(vocab_size, activation='softmax'))
                                                                                                              
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])	#metrics 指标
 model.fit(X, y, epochs=500, verbose=2,batch_size = 20)
 
 print(model.summary())
